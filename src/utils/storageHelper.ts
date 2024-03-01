@@ -11,10 +11,9 @@ export function getStorageItem(key: string) {
   return JSON.parse(data);
 }
 
-export function removeStorageItem(key: string) {
+export function clearStorage() {
   if (typeof window === "undefined") return;
 
-  window.localStorage.removeItem(key);
-
-  window.sessionStorage.removeItem(key);
+  window.sessionStorage.clear();
+  window.localStorage.clear();
 }

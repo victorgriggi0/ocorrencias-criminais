@@ -18,7 +18,7 @@ import Pagination from "@mui/material/Pagination";
 import { User } from "@phosphor-icons/react";
 
 import InternalLayout from "@/layouts/internalLayout";
-import { get, create, updt, del } from "../../api/departments";
+import { get, create, updt, del } from "@/services/departmentService";
 import Card from "@/components/card";
 import DeleteDialog from "@/components/deleteDialog";
 import FeedbackSnackbar from "@/components/feedbackSnackbar";

@@ -15,7 +15,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/navigation";
 
 import Copyright from "@/components/copyright";
-import { login } from "../../api/auth";
+import { login } from "@/services/authService";
 import FeedbackSnackbar from "@/components/feedbackSnackbar";
 import { AppRoutes } from "@/constants/appRoutes";
 
@@ -24,6 +24,7 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
 
     try {

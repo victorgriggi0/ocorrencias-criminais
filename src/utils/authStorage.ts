@@ -1,15 +1,8 @@
-export function setAuthToken(
-  key: string,
-  value: any,
-  rememberMe: boolean = true
-) {
+export function setAuthToken(key: string, value: any, rememberMe: boolean) {
   if (typeof window === "undefined") return;
 
   const authToken = JSON.stringify(value);
+  const storage = rememberMe ? localStorage : sessionStorage;
 
-  if (rememberMe) {
-    window.localStorage.setItem(key, authToken);
-  } else {
-    window.sessionStorage.setItem(key, authToken);
-  }
+  storage.setItem(key, authToken);
 }

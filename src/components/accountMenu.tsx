@@ -10,7 +10,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { SignOut, User } from "@phosphor-icons/react";
 
-import { removeStorageItem } from "@/utils/storageHelper";
+import { clearStorage } from "@/utils/storageHelper";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -101,11 +101,7 @@ export default function AccountMenu() {
           </Typography>
         </MenuItem>
         <Divider />
-        <Link
-          onClick={() => removeStorageItem("token")}
-          href="/login"
-          underline="none"
-        >
+        <Link onClick={() => clearStorage()} href="/login" underline="none">
           <MenuItem onClick={handleClose}>
             <ListItemIcon>
               <SignOut size={24} weight="fill" />
