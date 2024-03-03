@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 import "../styles/globals.css";
 import { checkIsPublicRoute } from "@/functions/checkIsPublicRoute";
-import { PrivateRoute } from "@/components/privateRoute";
+import AuthenticatedRoute from "@/components/authenticatedRoute";
 
 export default function RootLayout({
   children,
@@ -12,13 +12,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathName = usePathname();
+
   const isPublicPage = checkIsPublicRoute(pathName!);
 
   return (
     <html lang="pt-br">
       <body>
         {isPublicPage && children}
-        {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
+        {!isPublicPage && <AuthenticatedRoute>{children}</AuthenticatedRoute>}
       </body>
     </html>
   );

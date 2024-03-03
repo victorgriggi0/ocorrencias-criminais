@@ -3,12 +3,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
-import {
-  Database,
-  HouseSimple,
-  Buildings,
-  SignOut,
-} from "@phosphor-icons/react";
+import { Database, HouseSimple, Buildings } from "@phosphor-icons/react";
 
 export const mainListItems = (
   <React.Fragment>

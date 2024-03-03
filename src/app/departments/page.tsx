@@ -200,12 +200,12 @@ export default function Departments() {
   const showUpdateDepartment = (department: Department) => {
     setSelectedDepartment(department);
     setFormData({
-      name: department.name,
-      zip: department.zip,
-      state: department.state,
+      name: department.name || "",
+      zip: department.zip || "",
+      state: department.state || "",
       city: department.city,
-      neighborhood: department.neighborhood,
-      avenue: department.avenue,
+      neighborhood: department.neighborhood || "",
+      avenue: department.avenue || "",
     });
     setFormMode("update");
   };

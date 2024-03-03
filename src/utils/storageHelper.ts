@@ -14,6 +14,6 @@ export function getStorageItem(key: string) {
 export function clearStorage() {
   if (typeof window === "undefined") return;
 
-  window.sessionStorage.clear();
   window.localStorage.clear();
+  window.sessionStorage.clear();
 }

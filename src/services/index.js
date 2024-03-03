@@ -10,7 +10,7 @@ export const index = axios.create({
 });
 
 function addToken(req) {
-  const token = getStorageItem("token");
+  const token = getStorageItem("@auth:user");
   if (token) {
     req.headers.Authorization = `Bearer ${token}`;
   }

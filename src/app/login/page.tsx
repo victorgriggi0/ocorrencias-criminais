@@ -22,18 +22,37 @@ import { AppRoutes } from "@/constants/appRoutes";
 export default function Login() {
   const { push } = useRouter();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  /*  */
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
 
-    const data = new FormData(event.currentTarget);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: checked,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
     try {
       setIsLoadingAnimation(true);
-      await login({
-        email: data.get("email"),
-        password: data.get("password"),
-        rememberMe: rememberMe,
-      });
+      await login(formData);
       /* handleOpenSnackbar({
         severity: "success",
         message: "Sucesso: login efetuado com êxito!",
@@ -64,9 +83,6 @@ export default function Login() {
     setMessageSnackbar(props.message);
     setOpenSnackbar(true);
   };
-
-  /*  */
-  const [rememberMe, setRememberMe] = React.useState(false);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -101,7 +117,7 @@ export default function Login() {
           <Box>
             <img
               src="https://www.gov.br/pf/pt-br/principios-fundamentais/simbolos-da-policia-federal-2/emblema.png/@@images/image.png"
-              style={{ maxWidth: "70px" }}
+              style={{ maxWidth: "70px", marginBottom: "15px" }}
             />
           </Box>
           <Typography component="h1" variant="h6">
@@ -122,10 +138,12 @@ export default function Login() {
               fullWidth
               variant="standard"
               id="email"
-              label="Email Address"
+              label="Enderço de e-mail"
               name="email"
               autoComplete="email"
               autoFocus
+              value={formData.email}
+              onChange={handleInputChange}
             />
             <TextField
               margin="dense"
@@ -133,17 +151,20 @@ export default function Login() {
               fullWidth
               variant="standard"
               name="password"
-              label="Password"
+              label="Senha"
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formData.password}
+              onChange={handleInputChange}
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  value="remember"
                   color="primary"
-                  onChange={(e) => setRememberMe(e.target.checked)}
+                  name="rememberMe"
+                  checked={formData.rememberMe}
+                  onChange={handleCheckboxChange}
                 />
               }
               label="Lembrar-me"
