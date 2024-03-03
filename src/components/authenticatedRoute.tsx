@@ -27,9 +27,7 @@ type User = {
   }[];
 };
 
-const UserContext = React.createContext<User | null>(null);
-
-export const useAuthenticatedUser = () => React.useContext(UserContext);
+export const UserContext = React.createContext<User | null>(null);
 
 const AuthenticatedRoute = ({ children }: AuthenticatedRouteProps) => {
   const { push } = useRouter();

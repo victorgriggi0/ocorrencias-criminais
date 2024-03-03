@@ -24,6 +24,8 @@ import DeleteDialog from "@/components/deleteDialog";
 import FeedbackSnackbar from "@/components/feedbackSnackbar";
 import CreateButton from "@/components/createButton";
 import SaveButton from "@/components/saveButton";
+import { UserContext } from "@/components/authenticatedRoute";
+import { hasPermission } from "@/functions/checkPermissions";
 
 type Department = {
   id: number;
@@ -44,6 +46,7 @@ export default function Departments() {
   const [pageSize, setPageSize] = React.useState(10);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(1);
+  const user = React.useContext(UserContext);
 
   async function find() {
     try {
@@ -258,7 +261,10 @@ export default function Departments() {
     <InternalLayout>
       {/*  */}
       <div className="flex flex-col items-center space-y-7">
-        <CreateButton onClick={() => setFormMode("create")} />
+        {user &&
+          hasPermission(user, "8afe78fe-24c0-4dab-8eaf-6e9286aacd1f") && (
+            <CreateButton onClick={() => setFormMode("create")} />
+          )}
 
         {isSearchingAnimation ? (
           <CircularProgress color="inherit" />
@@ -289,23 +295,35 @@ export default function Departments() {
                       >
                         Visualizar usuários
                       </Button>
-                      <Button
-                        onClick={() => showUpdateDepartment(department)}
-                        sx={{
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        onClick={() => showDeleteDepartment(department)}
-                        color="error"
-                        sx={{
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        Apagar
-                      </Button>
+                      {user &&
+                        hasPermission(
+                          user,
+                          "c153dfe8-3daa-4ee9-8e90-9c9f7eb9dc6d"
+                        ) && (
+                          <Button
+                            onClick={() => showUpdateDepartment(department)}
+                            sx={{
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Editar
+                          </Button>
+                        )}
+                      {user &&
+                        hasPermission(
+                          user,
+                          "2d110185-852f-42aa-9c0f-48782b4cd424"
+                        ) && (
+                          <Button
+                            onClick={() => showDeleteDepartment(department)}
+                            color="error"
+                            sx={{
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Apagar
+                          </Button>
+                        )}
                     </>
                   }
                 />
