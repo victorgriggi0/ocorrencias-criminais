@@ -4,8 +4,6 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -26,7 +24,6 @@ export default function Login() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    rememberMe: false,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,14 +35,14 @@ export default function Login() {
     });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
     setFormData({
       ...formData,
       [name]: checked,
     });
-  };
+  }; */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,17 +154,6 @@ export default function Login() {
               autoComplete="current-password"
               value={formData.password}
               onChange={handleInputChange}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  name="rememberMe"
-                  checked={formData.rememberMe}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label="Lembrar-me"
             />
             <Button
               type="submit"

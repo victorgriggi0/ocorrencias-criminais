@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getStorageItem } from "@/utils/storageHelper";
+import { getCookieItem } from "@/utils/cookiesHelper";
 
 export const index = axios.create({
   baseURL: "http://localhost:3000",
@@ -10,7 +10,7 @@ export const index = axios.create({
 });
 
 function addToken(req) {
-  const token = getStorageItem("@auth:user");
+  const token = getCookieItem("@auth:user");
   if (token) {
     req.headers.Authorization = `Bearer ${token}`;
   }

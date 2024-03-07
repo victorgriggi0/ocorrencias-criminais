@@ -1,16 +1,15 @@
 import { index } from "./index";
-import { clearStorage } from "@/utils/storageHelper";
-import { setAuthToken } from "@/utils/authStorage";
+import { setAuthCookies, clearAuthCookies } from "@/utils/authCookies";
 
-export async function login({ email, password, rememberMe }) {
+export async function login({ email, password }) {
   try {
     const result = await index.post("/auth/login", {
       email: email,
       password: password,
     });
 
-    clearStorage();
-    setAuthToken("@auth:user", result.data.authToken, rememberMe);
+    clearAuthCookies("@auth:user");
+    setAuthCookies("@auth:user", result.data.authToken);
   } catch (error) {
     if (error.response) {
       console.error("error:", error.response);
