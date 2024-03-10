@@ -1,5 +1,5 @@
 import { index } from "./index";
-import { setAuthCookies, clearAuthCookies } from "@/utils/authCookies";
+import { setAuthCookies } from "@/utils/authCookies";
 
 export async function login({ email, password }) {
   try {
@@ -8,8 +8,7 @@ export async function login({ email, password }) {
       password: password,
     });
 
-    clearAuthCookies("@auth:user");
-    setAuthCookies("@auth:user", result.data.authToken);
+    setAuthCookies("@auth:token", result.data.authToken);
   } catch (error) {
     if (error.response) {
       console.error("error:", error.response);

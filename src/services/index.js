@@ -10,10 +10,11 @@ export const index = axios.create({
 });
 
 function addToken(req) {
-  const token = getCookieItem("@auth:user");
+  const token = getCookieItem("@auth:token");
   if (token) {
     req.headers.Authorization = `Bearer ${token}`;
   }
+
   return req;
 }
 

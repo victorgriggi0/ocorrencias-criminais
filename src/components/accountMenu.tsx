@@ -102,7 +102,7 @@ export default function AccountMenu() {
         </MenuItem>
         <Divider />
         <Link
-          onClick={() => clearAuthCookies("@auth:user")}
+          onClick={() => clearAuthCookies("@auth:token")}
           href="/login"
           underline="none"
         >

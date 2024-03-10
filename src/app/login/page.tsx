@@ -50,10 +50,6 @@ export default function Login() {
     try {
       setIsLoadingAnimation(true);
       await login(formData);
-      /* handleOpenSnackbar({
-        severity: "success",
-        message: "Sucesso: login efetuado com êxito!",
-      }); */
       push(AppRoutes.private.dashboard);
     } catch (error) {
       handleOpenSnackbar({
