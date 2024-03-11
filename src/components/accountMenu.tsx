@@ -9,8 +9,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { SignOut, User } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
 
-import { clearAuthCookies } from "@/utils/authCookies";
+import { logout } from "@/services/authService";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,6 +22,18 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { push } = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      push("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -101,26 +114,20 @@ export default function AccountMenu() {
           </Typography>
         </MenuItem>
         <Divider />
-        <Link
-          onClick={() => clearAuthCookies("@auth:token")}
-          href="/login"
-          underline="none"
-        >
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <SignOut size={24} weight="fill" />
-            </ListItemIcon>
-            <Typography
-              sx={{
-                color: "rgb(156 163 175)",
-                fontSize: "1rem",
-                lineHeight: "2rem",
-              }}
-            >
-              Sair
-            </Typography>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <SignOut size={24} weight="fill" />
+          </ListItemIcon>
+          <Typography
+            sx={{
+              color: "rgb(156 163 175)",
+              fontSize: "1rem",
+              lineHeight: "2rem",
+            }}
+          >
+            Sair
+          </Typography>
+        </MenuItem>
       </Menu>
     </React.Fragment>
   );
